@@ -9,6 +9,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import java.awt.Font;
+import java.awt.event.ActionListener;
+
 import javax.swing.JComboBox;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
@@ -190,19 +192,16 @@ public class CadastroQuestao extends JFrame {
 		rdbtnNewRadioButton_2.setBounds(368, 268, 56, 23);
 		contentPane.add(rdbtnNewRadioButton_2);
 		group.add(rdbtnNewRadioButton_2);
-
 		
 		JRadioButton rdbtnNewRadioButton_3 = new JRadioButton("");
 		rdbtnNewRadioButton_3.setBounds(368, 293, 56, 23);
 		contentPane.add(rdbtnNewRadioButton_3);
 		group.add(rdbtnNewRadioButton_3);
-
 		
 		JRadioButton rdbtnNewRadioButton_4 = new JRadioButton("");
 		rdbtnNewRadioButton_4.setBounds(368, 318, 56, 23);
 		contentPane.add(rdbtnNewRadioButton_4);
 		group.add(rdbtnNewRadioButton_4);
-
 		
 		JLabel lblNewLabel_8 = new JLabel("Resposta:");
 		lblNewLabel_8.setFont(new Font("Tahoma", Font.BOLD, 11));

@@ -2,21 +2,17 @@ package br.com.prototipo.main;
 
 import java.io.IOException;
 
-import br.com.prototipo.domain.Disciplina;
-import br.com.prototipo.domain.Materia;
+import br.com.prototipo.domain.Aluno;
+import br.com.prototipo.domain.Prova;
+import br.com.prototipo.domain.dto.AlternativaDTO;
+import br.com.prototipo.domain.dto.QuestaoDTO;
 import br.com.prototipo.util.ManipuladorArquivo;
+import br.com.prototipo.view.CadastroAluno;
 
 public class Main {
 
 	public static void main(String[] args) throws IOException {
-		ManipuladorArquivo manipula = new ManipuladorArquivo();
-		Disciplina disciplina = new Disciplina();
-		disciplina.setId((long) 1);
-		disciplina.setNome("teste");
-		Materia materia = new Materia();
-		materia.setId((long) 1);
-		disciplina.setMateria(materia);
-		manipula.insereDisciplina(disciplina);
+	CadastroAluno cadastroAluno = new CadastroAluno();
 
 	}
 }

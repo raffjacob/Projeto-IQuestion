@@ -1,17 +1,23 @@
 package br.com.prototipo.util;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.util.Random;
 
 import br.com.prototipo.domain.Alternativa;
 import br.com.prototipo.domain.Aluno;
 import br.com.prototipo.domain.Disciplina;
 import br.com.prototipo.domain.Materia;
 import br.com.prototipo.domain.Prova;
+import br.com.prototipo.domain.ProvaQuestao;
 import br.com.prototipo.domain.Questao;
 import br.com.prototipo.domain.dto.ProvaDTO;
 import br.com.prototipo.domain.dto.QuestaoDTO;
@@ -21,6 +27,7 @@ public class ManipuladorArquivo {
 
 	Conversor conversor = new Conversor();
 
+	// Pega todas as informações da prova feita
 	public ProvaDTO pegaProva(Integer id) {
 
 		ProvaDTO provaDTO = new ProvaDTO();
@@ -48,6 +55,7 @@ public class ManipuladorArquivo {
 		return provaDTO;
 	};
 
+	// retorna dados da prova (apenas prova) por id
 	public Prova leitorDeProva(Integer idProva) throws IOException {
 		BufferedReader buffReadProva = new BufferedReader(new FileReader("files/Prova.txt"));
 		String linhaProva = buffReadProva.readLine();
@@ -77,6 +85,7 @@ public class ManipuladorArquivo {
 		return prova;
 	}
 
+	// retorna dados do aluno por id
 	public Aluno pegaAluno(Integer idAluno) throws IOException {
 		BufferedReader buffReadAluno = new BufferedReader(new FileReader("files/Aluno.txt"));
 		String linhaAluno = buffReadAluno.readLine();
@@ -107,6 +116,7 @@ public class ManipuladorArquivo {
 		return aluno;
 	}
 
+	// retorna aluno atraves do (cpf || email) && senha
 	public Aluno login(String key, String password) throws IOException {
 		BufferedReader buffReadAluno = new BufferedReader(new FileReader("files/Aluno.txt"));
 		String linhaAluno = buffReadAluno.readLine();
@@ -155,6 +165,7 @@ public class ManipuladorArquivo {
 		return aluno;
 	}
 
+	// Retorna quantidade (integer) de questoes da prova
 	public Integer pegaQuantidadeQuestoes(Integer idProva) throws IOException {
 		BufferedReader buffReadProvaQ = new BufferedReader(new FileReader("files/ProvaQuestao.txt"));
 		String linhaProvaQuestao = buffReadProvaQ.readLine();
@@ -180,6 +191,7 @@ public class ManipuladorArquivo {
 		return count;
 	}
 
+	// Pega todas as questoes da prova;
 	public Questao[] pegaQuestoes(Integer idProva) throws IOException {
 
 		BufferedReader buffReadProvaQ = new BufferedReader(new FileReader("files/ProvaQuestao.txt"));
@@ -214,6 +226,7 @@ public class ManipuladorArquivo {
 		return questoes;
 	}
 
+	// Retorna questao por id;
 	public Questao pegaQuestao(Integer idQuestao) throws IOException {
 
 		BufferedReader buffReadQuestao = new BufferedReader(new FileReader("files/Questao.txt"));
@@ -246,6 +259,7 @@ public class ManipuladorArquivo {
 		return questao;
 	}
 
+	// Retorna materia por id;
 	public Materia pegaMateria(int idMateria) throws IOException {
 		BufferedReader buffReadMateria = new BufferedReader(new FileReader("files/Disciplina.txt"));
 		String linhaMateria = buffReadMateria.readLine();
@@ -272,6 +286,7 @@ public class ManipuladorArquivo {
 		return materia;
 	}
 
+	// retorna disciplina por id
 	public Disciplina pegaDisciplina(long idDisciplina) throws IOException {
 		BufferedReader buffReadDisciplina = new BufferedReader(new FileReader("files/Disciplina.txt"));
 		String linhaDisciplina = buffReadDisciplina.readLine();
@@ -299,6 +314,7 @@ public class ManipuladorArquivo {
 		return disciplina;
 	}
 
+	// retorna todas as alternativas vinculadas à uma questao (ate 5);
 	public Alternativa[] pegaAlternativas(Long idQuestao) throws IOException {
 
 		BufferedReader buffReadAlternativa = new BufferedReader(new FileReader("files/Alternativa.txt"));
@@ -335,12 +351,13 @@ public class ManipuladorArquivo {
 
 	}
 
+	// retorna inteiro com o numero de disciplinas vinculadas a uma materia
 	public Integer pegaNumeroDeDiscpPorIdMateria(Integer idMateria) throws IOException {
 		BufferedReader buffRead = new BufferedReader(new FileReader("files/Disciplina.txt"));
 		String linha = buffRead.readLine();
 
 		Integer count = 0;
-		Disciplina disciplina = new Disciplina();
+
 		while (true) {
 
 			if (linha != null) {
@@ -361,8 +378,9 @@ public class ManipuladorArquivo {
 		return count;
 	}
 
-	public Integer pegaNumeroDeLinhas(String fileName) throws IOException {
-		BufferedReader buffRead = new BufferedReader(new FileReader("files/" + fileName + ".txt"));
+	// retorna numero de linhas de um arquivo
+	public Integer pegaNumeroDeLinhas(String nomeArquivo) throws IOException {
+		BufferedReader buffRead = new BufferedReader(new FileReader("files/" + nomeArquivo + ".txt"));
 		String linha = buffRead.readLine();
 
 		Integer count = 0;
@@ -379,8 +397,9 @@ public class ManipuladorArquivo {
 		return count;
 	}
 
+	// retorna todas as materias
 	public Materia[] pegarTodasMaterias() throws IOException {
-		BufferedReader buffReadMateria = new BufferedReader(new FileReader("files/Disciplina.txt"));
+		BufferedReader buffReadMateria = new BufferedReader(new FileReader("files/Materia.txt"));
 
 		String linhaMateria = buffReadMateria.readLine();
 
@@ -408,6 +427,7 @@ public class ManipuladorArquivo {
 		return materias;
 	}
 
+	// retorna todas as disciplinas
 	public Disciplina[] pegarTodasDisciplinas() throws IOException {
 		BufferedReader buffReadDisciplina = new BufferedReader(new FileReader("files/Disciplina.txt"));
 
@@ -438,6 +458,7 @@ public class ManipuladorArquivo {
 		return disciplinas;
 	}
 
+	// retorna todas as disciplinas vinculadas a uma materia
 	public Disciplina[] pegarDisciplinaPorMateria(Integer idMateria) throws IOException {
 		BufferedReader buffReadDisciplina = new BufferedReader(new FileReader("files/Disciplina.txt"));
 
@@ -472,140 +493,321 @@ public class ManipuladorArquivo {
 		return disciplinas;
 	}
 
+	// Adiciona materia no arquivo txt
 	public void insereMateria(Materia materia) throws IOException {
-		File arq = new File("files/", "Materia.txt");
+		String nomeArquivo = "Materia.txt";
+		File arq = new File("files/", nomeArquivo);
 
-		BufferedReader buffRead = new BufferedReader(new FileReader("files/Disciplina.txt"));
+		String conteudo = retornarIdValido(nomeArquivo) + ";" + materia.getNome() + ";\n";
+		FileWriter writer = new FileWriter(arq, true);
+		PrintWriter print = new PrintWriter(writer);
 
-		String linha = buffRead.readLine();
-		while (true) {
-
-			if (linha != null) {
-
-			} else
-
-				linha = buffRead.readLine();
-			String conteudo = materia.getId() + ";" + materia.getNome() + ";\n";
-			FileWriter writer = new FileWriter(arq, true);
-			PrintWriter print = new PrintWriter(writer);
-
-			print.write(conteudo);
-			print.flush();
-			print.close();
-			writer.close();
-			break;
-		}
+		print.write(conteudo);
+		print.flush();
+		print.close();
+		writer.close();
 
 	}
 
+	// Adiciona disciplina no arquivo txt
 	public void insereDisciplina(Disciplina disciplina) throws IOException {
+		String nomeArquivo = "Disciplina.txt";
+		File arq = new File("files/", nomeArquivo);
 
-		File arq = new File("files/", "Disciplina.txt");
+		String conteudo = retornarIdValido(nomeArquivo) + ";" + disciplina.getNome() + ";"
+				+ disciplina.getMateria().getId() + ";\n";
+		FileWriter writer = new FileWriter(arq, true);
+		PrintWriter print = new PrintWriter(writer);
 
-		BufferedReader buffRead = new BufferedReader(new FileReader("files/Disciplina.txt"));
-
-		String linha = buffRead.readLine();
-		while (true) {
-
-			if (linha != null) {
-
-			} else
-
-				linha = buffRead.readLine();
-			String conteudo = disciplina.getId() + ";" + disciplina.getNome() + ";" + disciplina.getMateria().getId()
-					+ ";\n";
-			FileWriter writer = new FileWriter(arq, true);
-			PrintWriter print = new PrintWriter(writer);
-
-			print.write(conteudo);
-			print.flush();
-			print.close();
-			writer.close();
-			break;
-		}
-
+		print.write(conteudo);
+		print.flush();
+		print.close();
+		writer.close();
 	}
 
+	// Adiciona aluno no arquivo txt
 	public void insereAluno(Aluno aluno) throws IOException {
-		File arq = new File("files/", "Aluno.txt");
+		String nomeArquivo = "Aluno.txt";
+		File arq = new File("files/", nomeArquivo);
 
-		BufferedReader buffRead = new BufferedReader(new FileReader("files/Disciplina.txt"));
+		String conteudo = retornarIdValido(nomeArquivo) + ";" + aluno.getNome() + ";" + aluno.getCpf() + ";"
+				+ aluno.getEmail() + ";" + aluno.getSenha() + ";" + aluno.getTelefone() + ";" + aluno.getSexo() + "\n";
+		FileWriter writer = new FileWriter(arq, true);
+		PrintWriter print = new PrintWriter(writer);
 
-		String linha = buffRead.readLine();
-		while (true) {
-
-			if (linha != null) {
-
-			} else
-
-				linha = buffRead.readLine();
-			String conteudo = aluno.getId() + ";" + aluno.getNome() + ";" + aluno.getCpf() + ";" + aluno.getEmail()
-					+ ";" + aluno.getSenha() + ";" + aluno.getTelefone() + ";" + aluno.getSexo() + "\n";
-			FileWriter writer = new FileWriter(arq, true);
-			PrintWriter print = new PrintWriter(writer);
-
-			print.write(conteudo);
-			print.flush();
-			print.close();
-			writer.close();
-			break;
-		}
+		print.write(conteudo);
+		print.flush();
+		print.close();
+		writer.close();
 
 	}
 
-	public void insereQuestao(Materia materia) throws IOException {
-		File arq = new File("files/", "Materia.txt");
+	// Adiciona questao no arquivo txt
+	public void insereQuestao(Questao questao) throws IOException {
+		String nomeArquivo = "Questao.txt";
+		File arq = new File("files/", nomeArquivo);
 
-		BufferedReader buffRead = new BufferedReader(new FileReader("files/Disciplina.txt"));
+		String conteudo = retornarIdValido(nomeArquivo) + ";" + questao.getStatus() + ";" + questao.getTipo() + ";"
+				+ questao.getDissetacao() + ";" + questao.getContador() + ";" + questao.getDificuldade() + ";"
+				+ questao.getDisciplina().getId() + "\n";
+		FileWriter writer = new FileWriter(arq, true);
+		PrintWriter print = new PrintWriter(writer);
 
+		print.write(conteudo);
+		print.flush();
+		print.close();
+		writer.close();
+
+	}
+
+	// Adiciona alternativa no arquivo txt
+	public void insereAlternativa(Alternativa alternativa) throws IOException {
+		String nomeArquivo = "Alternativa.txt";
+		File arq = new File("files/", nomeArquivo);
+
+		String conteudo = retornarIdValido(nomeArquivo) + ";" + alternativa.getAlternativa() + ";"
+				+ alternativa.getCorreta() + ";" + alternativa.getQuestao().getId() + "\n";
+
+		FileWriter writer = new FileWriter(arq, true);
+		PrintWriter print = new PrintWriter(writer);
+
+		print.write(conteudo);
+		print.flush();
+		print.close();
+		writer.close();
+
+	}
+
+	// retorna todas as questoes gravadas
+	public Questao[] pegaTodasQuestoes() throws IOException {
+
+		String nomeArquivo = "Questao";
+		BufferedReader buffReadProvaQ = new BufferedReader(new FileReader("files/" + nomeArquivo + ".txt"));
+		String linhaProvaQuestao = buffReadProvaQ.readLine();
+		Integer numQuestoes = pegaNumeroDeLinhas(nomeArquivo);
+		String[] ids = new String[numQuestoes];
+		int count = 0;
+		while (true) {
+
+			if (linhaProvaQuestao != null) {
+
+				String segments[] = linhaProvaQuestao.split(";");
+				ids[count] = segments[0];
+				count++;
+			} else
+				break;
+			linhaProvaQuestao = buffReadProvaQ.readLine();
+		}
+		buffReadProvaQ.close();
+
+		Questao[] questoes = new Questao[numQuestoes];
+		for (int i = 0; i < ids.length; i++) {
+			questoes[i] = pegaQuestao(Integer.parseInt(ids[i]));
+		}
+
+		return questoes;
+	}
+
+	// retorna numero de questoes vinculadas a uma materia
+	public Integer pegaNumeroDeQuestoesPorDisciplina(Integer idDisciplina) throws IOException {
+
+		BufferedReader buffRead = new BufferedReader(new FileReader("files/Questao.txt"));
 		String linha = buffRead.readLine();
+
+		Integer count = 0;
+
 		while (true) {
 
 			if (linha != null) {
+
+				String segments[] = linha.split(";");
+
+				if (Integer.parseInt(segments[6]) == idDisciplina) {
+					count++;
+
+				}
 
 			} else
 				break;
 			linha = buffRead.readLine();
-			String conteudo = materia.getId() + ";" + materia.getNome() + ";\n";
-			FileWriter writer = new FileWriter(arq, true);
-			PrintWriter print = new PrintWriter(writer);
-
-			print.write(conteudo);
-			print.flush();
-			print.close();
-			writer.close();
 		}
+		buffRead.close();
+
+		return count;
 
 	}
 
-	public void insereAlternativa(Materia materia) throws IOException {
-		File arq = new File("files/", "Materia.txt");
+	public Questao[] pegarQuestoesPorMateria(Integer idDisciplina) throws IOException {
 
-		BufferedReader buffRead = new BufferedReader(new FileReader("files/Disciplina.txt"));
+		Integer quantQuestoesEncontradas = pegaNumeroDeQuestoesPorDisciplina(idDisciplina);
 
-		String linha = buffRead.readLine();
-		while (true) {
+		Questao[] todasQ = pegaTodasQuestoes();
+		Questao[] questoesMateria = new Questao[quantQuestoesEncontradas];
 
-			if (linha != null) {
-
-			} else
-				break;
-			linha = buffRead.readLine();
-			String conteudo = materia.getId() + ";" + materia.getNome() + ";\n";
-			FileWriter writer = new FileWriter(arq, true);
-			PrintWriter print = new PrintWriter(writer);
-
-			print.write(conteudo);
-			print.flush();
-			print.close();
-			writer.close();
+		Integer count = 0;
+		for (Questao questao : todasQ) {
+			if (questao.getDisciplina().getId() != null && questao.getDisciplina().getId() == (long) idDisciplina) {
+				questoesMateria[count] = questao;
+				count++;
+			}
 		}
-
+		return questoesMateria;
 	}
 
-	public Prova gerarProva(Integer idAluno, Integer idMateria) throws IOException {
+	public Integer[] gerarListaAleatoria(Integer tamanhoLista) {
 
-		Materia materia = pegaMateria(idMateria);
+		Integer[] lista = new Integer[tamanhoLista];
+		int find = 0;
+		int c, i = 0;
+		int[] num = new int[tamanhoLista];
+		Random r = new Random();
+
+		// contruindo o array sem repetição
+		for (i = 0; i < num.length; i++) {
+			find = r.nextInt(tamanhoLista) + 1;
+			if (i == 0) {
+				num[i] = find;
+			} else {
+				c = 0;
+				while (c < i) {
+					if (num[c] == find) {
+						find = r.nextInt(tamanhoLista) + 1;
+						c = 0;
+					} else {
+						c++;
+					}
+				}
+				num[i] = find;
+			}
+		}
+
+		for (i = 0; i < num.length; i++) {
+			lista[i] = num[i] - 1;
+		}
+
+		return lista;
+	}
+
+	public Prova gerarProva(Prova prova, Integer idDisciplina, Integer quantQuestoes) throws IOException {
+
+		String nomeArquivo = "Prova.txt";
+		File arq = new File("files/", nomeArquivo);
+		Integer id = retornarIdValido(nomeArquivo);
+
+		String conteudo = id + ";" + prova.getData() + "; " + prova.getNota() + ";" + prova.getAluno().getId() + "\n";
+
+		Questao[] questoesMaterias = pegarQuestoesPorMateria(idDisciplina);
+
+		if (quantQuestoes > questoesMaterias.length) {
+			// TODO erro
+			System.out.println("erro");
+		}
+		for (Questao questao : questoesMaterias) {
+			System.out.println("teste 1");
+			System.out.println(questao);
+		}
+
+		Integer[] ordemAleatoria = gerarListaAleatoria(questoesMaterias.length);
+
+		Questao[] questoesSelecionadas = new Questao[quantQuestoes];
+
+		for (int i = 0; i < questoesSelecionadas.length; i++) {
+
+			ProvaQuestao provaQuestao = new ProvaQuestao();
+			provaQuestao.setIdQuestao(questoesMaterias[ordemAleatoria[i]].getId());
+			provaQuestao.setIdProva((long) id);
+			insereProvaQuestao(provaQuestao);
+		}
+
+		FileWriter writer = new FileWriter(arq, true);
+		PrintWriter print = new PrintWriter(writer);
+
+		print.write(conteudo);
+		print.flush();
+		print.close();
+		writer.close();
+
 		return null;
+	}
+
+	// Adiciona vinculacao entra prova e questao;
+	public void insereProvaQuestao(ProvaQuestao provaQuestao) throws IOException {
+		String nomeArquivo = "ProvaQuestao.txt";
+		File arq = new File("files/", nomeArquivo);
+
+		String conteudo = retornarIdValido(nomeArquivo) + ";" + provaQuestao.getIdQuestao() + ";"
+				+ provaQuestao.getIdProva() + "\n";
+
+		FileWriter writer = new FileWriter(arq, true);
+		PrintWriter print = new PrintWriter(writer);
+
+		print.write(conteudo);
+		print.flush();
+		print.close();
+		writer.close();
+
+	}
+
+	public Prova corrigirProva(Double nota, Integer idProva) throws IOException {
+
+		String arquivo = "files/Prova.txt";
+		String arquivoTmp = "files/Prova-tmp";
+
+		BufferedWriter writer = new BufferedWriter(new FileWriter(arquivoTmp));
+		BufferedReader reader = new BufferedReader(new FileReader(arquivo));
+
+		String linha;
+		Prova prova = new Prova();
+		while ((linha = reader.readLine()) != null) {
+			String segments[] = linha.split(";");
+			if (segments[0].equals(idProva.toString())) {
+
+				if (linha.contains(";;")) {
+					linha = linha.replace(";;", ";" + nota.toString() + ";");
+				} else if (linha.contains(";null;")) {
+					linha = linha.replace(";null;", ";" + nota.toString() + ";");
+				}
+				prova.setId(Long.parseLong(segments[0]));
+				prova.setNota(nota);
+				prova.setData(segments[1]);
+				prova.setAluno(pegaAluno(Integer.parseInt(segments[3])));
+			}
+			writer.write(linha + "\n");
+		}
+		writer.close();
+		reader.close();
+
+		new File(arquivo).delete();
+		new File(arquivoTmp).renameTo(new File(arquivo));
+
+		return prova;
+
+	}
+
+	public int retornarIdValido(String arq) {
+
+		String ultimo = "";
+		try {
+			InputStream is = new FileInputStream("files/" + arq);
+			InputStreamReader isr = new InputStreamReader(is);
+			BufferedReader br = new BufferedReader(isr);
+
+			String line = "";
+			while (line != null) {
+				line = br.readLine();
+				if (line != null) {
+					ultimo = line;
+				}
+			}
+
+			br.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		if (ultimo == "") {
+			return 1;
+		}
+		String segments[] = ultimo.split(";");
+		return Integer.parseInt(segments[0]) + 1;
 	}
 }
