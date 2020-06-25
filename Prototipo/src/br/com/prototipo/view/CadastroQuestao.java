@@ -10,6 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import java.awt.Font;
 import javax.swing.JComboBox;
+import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JRadioButton;
 import javax.swing.JButton;
@@ -19,6 +20,11 @@ public class CadastroQuestao extends JFrame {
 	private JPanel contentPane;
 	private JTextField textField;
 	private JTextField textField_2;
+	private JTextField textField_1;
+	private JTextField textField_3;
+	private JTextField textField_4;
+	private JTextField textField_5;
+	private JTextField textField_6;
 
 	/**
 	 * Launch the application.
@@ -42,7 +48,7 @@ public class CadastroQuestao extends JFrame {
 	public CadastroQuestao() {
 		setTitle("Cadastro de Quest\u00E3o");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 480, 256);
+		setBounds(100, 100, 480, 417);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -115,7 +121,92 @@ public class CadastroQuestao extends JFrame {
 		contentPane.add(comboBox_3);
 		
 		JButton btnNewButton = new JButton("Cadastrar");
-		btnNewButton.setBounds(331, 183, 123, 23);
+		btnNewButton.setBounds(331, 353, 123, 23);
 		contentPane.add(btnNewButton);
+		
+		JLabel lblNewLabel_1 = new JLabel("1)");
+		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblNewLabel_1.setBounds(10, 222, 46, 14);
+		contentPane.add(lblNewLabel_1);
+		
+		JLabel lblNewLabel_1_1 = new JLabel("2)");
+		lblNewLabel_1_1.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblNewLabel_1_1.setBounds(10, 247, 46, 14);
+		contentPane.add(lblNewLabel_1_1);
+		
+		JLabel lblNewLabel_1_2 = new JLabel("3)");
+		lblNewLabel_1_2.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblNewLabel_1_2.setBounds(10, 272, 46, 14);
+		contentPane.add(lblNewLabel_1_2);
+		
+		JLabel lblNewLabel_1_3 = new JLabel("4)");
+		lblNewLabel_1_3.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblNewLabel_1_3.setBounds(10, 297, 46, 14);
+		contentPane.add(lblNewLabel_1_3);
+		
+		JLabel lblNewLabel_1_4 = new JLabel("5)");
+		lblNewLabel_1_4.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblNewLabel_1_4.setBounds(10, 322, 46, 14);
+		contentPane.add(lblNewLabel_1_4);
+		
+		textField_1 = new JTextField();
+		textField_1.setBounds(33, 219, 325, 20);
+		contentPane.add(textField_1);
+		textField_1.setColumns(10);
+		
+		textField_3 = new JTextField();
+		textField_3.setColumns(10);
+		textField_3.setBounds(33, 244, 325, 20);
+		contentPane.add(textField_3);
+		
+		textField_4 = new JTextField();
+		textField_4.setColumns(10);
+		textField_4.setBounds(33, 269, 325, 20);
+		contentPane.add(textField_4);
+		
+		textField_5 = new JTextField();
+		textField_5.setColumns(10);
+		textField_5.setBounds(33, 297, 325, 20);
+		contentPane.add(textField_5);
+		
+		textField_6 = new JTextField();
+		textField_6.setColumns(10);
+		textField_6.setBounds(33, 322, 325, 20);
+		contentPane.add(textField_6);
+		
+		ButtonGroup group = new ButtonGroup();
+		
+		JRadioButton rdbtnNewRadioButton = new JRadioButton("");
+		rdbtnNewRadioButton.setBounds(368, 218, 56, 23);
+		contentPane.add(rdbtnNewRadioButton);
+		group.add(rdbtnNewRadioButton);
+		
+		JRadioButton rdbtnNewRadioButton_1 = new JRadioButton("");
+		rdbtnNewRadioButton_1.setBounds(368, 243, 56, 23);
+		contentPane.add(rdbtnNewRadioButton_1);
+		group.add(rdbtnNewRadioButton_1);
+		
+		JRadioButton rdbtnNewRadioButton_2 = new JRadioButton("");
+		rdbtnNewRadioButton_2.setBounds(368, 268, 56, 23);
+		contentPane.add(rdbtnNewRadioButton_2);
+		group.add(rdbtnNewRadioButton_2);
+
+		
+		JRadioButton rdbtnNewRadioButton_3 = new JRadioButton("");
+		rdbtnNewRadioButton_3.setBounds(368, 293, 56, 23);
+		contentPane.add(rdbtnNewRadioButton_3);
+		group.add(rdbtnNewRadioButton_3);
+
+		
+		JRadioButton rdbtnNewRadioButton_4 = new JRadioButton("");
+		rdbtnNewRadioButton_4.setBounds(368, 318, 56, 23);
+		contentPane.add(rdbtnNewRadioButton_4);
+		group.add(rdbtnNewRadioButton_4);
+
+		
+		JLabel lblNewLabel_8 = new JLabel("Resposta:");
+		lblNewLabel_8.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblNewLabel_8.setBounds(368, 195, 86, 14);
+		contentPane.add(lblNewLabel_8);
 	}
 }
